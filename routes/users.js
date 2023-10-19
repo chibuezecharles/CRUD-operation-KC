@@ -70,14 +70,14 @@ router.post('/login', async (req, res) => {
         }
 
         const accessToken = createToken(existingUser);
-        res.cookie("access-token", accessToken, {
-          maxAge: 24 * 60 * 60 * 1000, // in milliseconds
-          httpOnly: true,  // to protect cookies from javascript injection
-          secure: true, // Set to true if using HTTPS
-          sameSite: 'strict' // Recommended for security
-        });
+        // res.cookie("access-token", accessToken, {
+        //   maxAge: 24 * 60 * 60 * 1000, // in milliseconds
+        //   httpOnly: true,  // to protect cookies from javascript injection
+        //   secure: true, // Set to true if using HTTPS
+        //   sameSite: 'strict' // Recommended for security
+        // });
 
-        return res.status(200).json({message: 'login successful', existingUser});
+        return res.status(200).json({message: 'login successful', existingUser, accessToken:accessToken});
     
    } catch (error) {
     return res.status(500).json({message: error.message});
