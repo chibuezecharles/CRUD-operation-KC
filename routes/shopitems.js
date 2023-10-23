@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         if(!shopItems){
             return res.status(400).json({ message: "failed to get all shop items"});
         }
-        return res.status(200).json({ message: " successfull", shopItems: shopItems });
+        return res.status(200).json({ message: "successfull", shopItems: shopItems });
         
     } catch (error) {
         return res.status(500).json({message: error.message});
@@ -82,11 +82,12 @@ router.delete('/remove-item', adminOnly, async (req, res) =>{
 
     try {
         const {id} = req.body;
+        // console.log('Attempting to delete item with ID:', id);
         const removeItem = await shopitems.findByIdAndDelete(id);
         if(!removeItem){
             return res.status(400).json({message: 'failed to remove'});
         }
-        return res.status(200).json({message: 'item deleted successfully'});
+        return res.status(204).json({message: 'item deleted successfully'});
     } catch (error) {
         return res.status(500).json(error.message);
     }
